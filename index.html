@@ -157,6 +157,7 @@
       padding: 0;
       background: #020203;
       overflow-x: clip;
+      overscroll-behavior: none;
     }
 
     body { min-height: 100dvh; }
@@ -201,9 +202,8 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 100vh;
-      height: 100svh;
-      min-height: 100svh;
+      height: calc(var(--vh, 1vh) * 100);
+      min-height: calc(var(--vh, 1vh) * 100);
       z-index: 0;
       pointer-events: none;
       background:
@@ -223,9 +223,8 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 100vh;
-      height: 100svh;
-      min-height: 100svh;
+      height: calc(var(--vh, 1vh) * 100);
+      min-height: calc(var(--vh, 1vh) * 100);
       z-index: 0;
       pointer-events: none;
       background:
@@ -1874,8 +1873,13 @@
       const modalRoute = document.getElementById('modalRoute');
       const header = document.querySelector('.topbar');
       const hostCandidate = document.getElementById('monolithScroll');
+      const heroMedia = document.querySelector('.hero-media');
+      const monolithEl = document.querySelector('.monolith');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const canUseHistory = !isFramerMode;
+
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
 
       const hostStyle = hostCandidate ? getComputedStyle(hostCandidate) : null;
       const hostScrollable = !!(hostCandidate && hostStyle && /(auto|scroll)/.test(hostStyle.overflowY));
@@ -1889,6 +1893,22 @@
         }
         return Math.max(0, scrollHost.scrollTop || 0);
       };
+
+      let shutterRaf = 0;
+      let latestScroll = 0;
+      const flushShutterSync = () => {
+        shutterRaf = 0;
+        document.documentElement.style.setProperty('--shutterScrollY', `${latestScroll}px`);
+      };
+      const syncShutterOnScroll = () => {
+        latestScroll = Math.max(0, getScrollTop());
+        if (!shutterRaf) shutterRaf = requestAnimationFrame(flushShutterSync);
+      };
+      if (heroMedia || monolithEl) {
+        syncShutterOnScroll();
+        const scrollTarget = usingWindowScroll ? window : scrollHost;
+        scrollTarget.addEventListener('scroll', syncShutterOnScroll, { passive: true });
+      }
 
       const scrollToTop = (top = 0, behavior = 'auto') => {
         if (usingWindowScroll) {
