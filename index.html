@@ -198,7 +198,12 @@
     .monolith::before {
       content: "";
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      height: 100svh;
+      min-height: 100svh;
       z-index: 0;
       pointer-events: none;
       background:
@@ -207,16 +212,30 @@
         radial-gradient(1100px 680px at 50% 64%, rgba(197, 162, 83, .05), transparent 74%);
       opacity: .90;
       mix-blend-mode: screen;
+      transition: transform .2s linear, opacity .2s var(--ease);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     .hero-media {
-      position: fixed; inset: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      height: 100svh;
+      min-height: 100svh;
       z-index: 0;
       pointer-events: none;
       background:
         radial-gradient(900px 520px at 70% 24%, rgba(197, 162, 83, .10), transparent 58%),
         radial-gradient(760px 520px at 20% 10%, rgba(255, 255, 255, .05), transparent 55%),
         linear-gradient(180deg, rgba(0, 0, 0, .45), rgba(0, 0, 0, .75));
+      transition: transform .2s linear, opacity .2s var(--ease);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
     .hero-image {
       width: 100%; height: 100%;
@@ -1866,9 +1885,9 @@
 
       const getScrollTop = () => {
         if (usingWindowScroll) {
-          return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          return Math.max(0, window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
         }
-        return scrollHost.scrollTop;
+        return Math.max(0, scrollHost.scrollTop || 0);
       };
 
       const scrollToTop = (top = 0, behavior = 'auto') => {
