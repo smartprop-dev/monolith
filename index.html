@@ -214,6 +214,8 @@
       mix-blend-mode: screen;
       transition: transform .2s linear, opacity .2s var(--ease);
       will-change: transform, opacity;
+      transform-origin: center top;
+      transform: translate3d(0, 0, 0) scale(var(--shutterScale, 1));
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
@@ -233,6 +235,8 @@
         linear-gradient(180deg, rgba(0, 0, 0, .45), rgba(0, 0, 0, .75));
       transition: transform .2s linear, opacity .2s var(--ease);
       will-change: transform, opacity;
+      transform-origin: center top;
+      transform: translate3d(0, 0, 0) scale(var(--shutterScale, 1));
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
@@ -1894,20 +1898,43 @@
         return Math.max(0, scrollHost.scrollTop || 0);
       };
 
+      const getRawScrollTop = () => {
+        if (usingWindowScroll) {
+          return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        }
+        return scrollHost.scrollTop || 0;
+      };
+
       let shutterRaf = 0;
       let latestScroll = 0;
+      const updateShutter = (scrollValue) => {
+        const safeScroll = scrollValue > 0 ? scrollValue : 0;
+        const currentScale = 1;
+        const safeScale = Math.max(1, currentScale);
+        document.documentElement.style.setProperty('--shutterScrollY', `${safeScroll}px`);
+        document.documentElement.style.setProperty('--shutterScale', String(safeScale));
+      };
       const flushShutterSync = () => {
         shutterRaf = 0;
-        document.documentElement.style.setProperty('--shutterScrollY', `${latestScroll}px`);
+        if (latestScroll <= 0) {
+          updateShutter(0);
+          return;
+        }
+        updateShutter(latestScroll);
       };
-      const syncShutterOnScroll = () => {
-        latestScroll = Math.max(0, getScrollTop());
+      const syncShutterOnScroll = (e) => {
+        const rawScroll = getRawScrollTop();
+        latestScroll = Math.max(0, rawScroll);
+        if (rawScroll < 0 && latestScroll === 0 && e && e.cancelable) {
+          e.preventDefault();
+        }
         if (!shutterRaf) shutterRaf = requestAnimationFrame(flushShutterSync);
       };
       if (heroMedia || monolithEl) {
+        updateShutter(0);
         syncShutterOnScroll();
         const scrollTarget = usingWindowScroll ? window : scrollHost;
-        scrollTarget.addEventListener('scroll', syncShutterOnScroll, { passive: true });
+        scrollTarget.addEventListener('scroll', syncShutterOnScroll, { passive: false });
       }
 
       const scrollToTop = (top = 0, behavior = 'auto') => {
