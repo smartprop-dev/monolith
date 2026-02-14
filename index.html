@@ -1802,7 +1802,7 @@
               </div>
             </div>
 
-            <form class="gate-form glass tier-2 levitate reveal" data-reveal action="https://formspree.io/f/xjgogkek" method="POST">
+            <form id="elite60Form" class="gate-form glass tier-2 levitate reveal" data-reveal action="https://formspree.io/f/xjgogkek" method="POST">
               <div class="form-head">
                 <div class="form-title">Elite 60 Onboarding Protocol</div>
                 <div class="form-sub mono muted">VETTING / QUALITY CONTROL</div>
@@ -1834,6 +1834,7 @@
               </label>
 
               <button class="btn btn-solid btn-block" type="submit">Initiate Onboarding</button>
+              <div id="elite60FormStatus" class="form-sub mono muted" aria-live="polite"></div>
 
               <div class="modal-note ui" style="margin-top: 12px;">
                 <span class="gold mono">QUALITY CONTROL:</span>
@@ -1841,6 +1842,26 @@
                 The cap protects signal integrity, execution bandwidth, and audit discipline. Submissions are screened and verified.
               </div>
             </form>
+
+            <div id="elite60LockedCard" class="gate-form glass tier-2 levitate" hidden aria-hidden="true">
+              <div class="form-head">
+                <div class="form-title">[IDENTITY VERIFICATION: PENDING]</div>
+                <div class="form-sub mono muted">NEURAL ACCESS LOCK</div>
+              </div>
+
+              <div class="modal-note ui">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" role="img" aria-label="Locked status icon">
+                  <path d="M8 10V7a4 4 0 1 1 8 0v3" stroke="rgba(197, 162, 83, .92)" stroke-width="1.7" stroke-linecap="round"/>
+                  <rect x="5" y="10" width="14" height="10" rx="2.4" stroke="rgba(247, 248, 251, .92)" stroke-width="1.7"/>
+                  <path d="M12 14.2v2.6" stroke="rgba(247, 248, 251, .92)" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  Your credentials have been logged into the neural grid. Access to the Elite 60 dashboard is restricted while the Vetting Committee reviews your profile.
+                </div>
+              </div>
+
+              <div class="form-sub mono muted">STATION: ENCRYPTED / SESSION: ACTIVE</div>
+            </div>
           </div>
         </div>
       </section>
@@ -2264,6 +2285,107 @@
 
       const path = (location.pathname || '').replace(/\/+$/, '').toLowerCase();
       if (path === '/portal' || path === '/portal.html') openModal(path);
+
+      const ELITE60_KEY = 'elite60_submitted';
+      const elite60Form = document.getElementById('elite60Form');
+      const elite60LockedCard = document.getElementById('elite60LockedCard');
+      const elite60Status = document.getElementById('elite60FormStatus');
+      const elite60SubmitBtn = elite60Form ? elite60Form.querySelector('button[type="submit"]') : null;
+      const elite60DefaultBtnLabel = elite60SubmitBtn ? elite60SubmitBtn.textContent.trim() : 'Initiate Onboarding';
+
+      const setElite60Status = (message = '') => {
+        if (!elite60Status) return;
+        elite60Status.textContent = message;
+      };
+
+      const getElite60Submitted = () => {
+        try {
+          return window.localStorage.getItem(ELITE60_KEY) === 'true';
+        } catch (_) {
+          return false;
+        }
+      };
+
+      const setElite60Submitted = () => {
+        try {
+          window.localStorage.setItem(ELITE60_KEY, 'true');
+        } catch (_) {}
+      };
+
+      const showLockedState = () => {
+        if (elite60Form) {
+          elite60Form.hidden = true;
+          elite60Form.setAttribute('aria-hidden', 'true');
+          elite60Form.setAttribute('inert', '');
+        }
+        if (elite60LockedCard) {
+          elite60LockedCard.hidden = false;
+          elite60LockedCard.setAttribute('aria-hidden', 'false');
+        }
+      };
+
+      const showFormState = () => {
+        if (elite60Form) {
+          elite60Form.hidden = false;
+          elite60Form.setAttribute('aria-hidden', 'false');
+          elite60Form.removeAttribute('inert');
+        }
+        if (elite60LockedCard) {
+          elite60LockedCard.hidden = true;
+          elite60LockedCard.setAttribute('aria-hidden', 'true');
+        }
+        if (elite60SubmitBtn) {
+          elite60SubmitBtn.disabled = false;
+          elite60SubmitBtn.style.opacity = '1';
+          elite60SubmitBtn.textContent = elite60DefaultBtnLabel;
+        }
+      };
+
+      if (elite60Form && elite60LockedCard) {
+        if (getElite60Submitted()) showLockedState();
+        else showFormState();
+      }
+
+      if (elite60Form && elite60SubmitBtn) {
+        elite60Form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          setElite60Status('');
+
+          if (!elite60Form.checkValidity()) {
+            elite60Form.reportValidity();
+            return;
+          }
+
+          elite60SubmitBtn.disabled = true;
+          elite60SubmitBtn.style.opacity = '.72';
+          elite60SubmitBtn.textContent = 'TRANSMITTING...';
+
+          try {
+            const response = await fetch(elite60Form.action, {
+              method: 'POST',
+              body: new FormData(elite60Form),
+              headers: { Accept: 'application/json' }
+            });
+
+            if (response.ok) {
+              setElite60Submitted();
+              showLockedState();
+              setElite60Status('');
+              return;
+            }
+
+            setElite60Status('TRANSMISSION FAILED. RETRY.');
+          } catch (_) {
+            setElite60Status('NETWORK ERROR. CHECK CONNECTION.');
+          }
+
+          if (!elite60Form.hidden) {
+            elite60SubmitBtn.disabled = false;
+            elite60SubmitBtn.style.opacity = '1';
+            elite60SubmitBtn.textContent = elite60DefaultBtnLabel;
+          }
+        });
+      }
 
       const obsidianInteractiveCards = Array.from(document.querySelectorAll('.obsidian-interactive'));
       if (!prefersReduced && obsidianInteractiveCards.length) {
