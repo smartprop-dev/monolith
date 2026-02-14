@@ -1397,12 +1397,12 @@
             <div class="panel glass obsidian-base obsidian-interactive access-card" id="accessCard">
               <div class="access-head">
                 <div class="panel-head mono">
-                  <span class="tag">Institutional Access</span>
+                  <a href="index.html" aria-label="Return to Home"><span class="tag">SP</span></a>
                   <span class="muted">Proprietary AI Analysis</span>
                 </div>
-                <h1 class="serif access-title">Signal Dispatch Request</h1>
+                <h1 class="serif access-title">Market Alpha Dispatch</h1>
                 <p class="access-sub ui">
-                  Submit your details to receive SmartPropAI institutional-grade report generation.
+                  Request a sample of institutional-grade intelligence. Receive a curated analysis of a high-yield asset currently identified by the SmartPropAI neural grid.
                 </p>
               </div>
 
@@ -1415,13 +1415,13 @@
                     </label>
 
                     <label class="field">
-                      <span class="label mono">Institutional Email</span>
+                      <span class="label mono">INSTITUTIONAL EMAIL</span>
                       <input type="email" name="_replyto" placeholder="name@company.com" autocomplete="email" required />
                     </label>
                   </div>
 
                   <div class="access-actions">
-                    <button class="btn btn-solid mono" type="submit" id="submitBtn">SEND ME THE REPORT</button>
+                    <button class="btn btn-solid mono" type="submit" id="submitBtn">GENERATE ALPHA DOSSIER</button>
                     <div class="access-status mono" id="formStatus" aria-live="polite"></div>
                   </div>
                 </form>
@@ -1434,9 +1434,9 @@
                         <path class="check" d="M14 20.6 L18 24.8 L26.2 16.4"></path>
                       </svg>
                     </div>
-                    <h2 class="serif success-title">Transmission Complete</h2>
-                    <p class="success-text ui">Your request has been encrypted and queued. Expect your report within 24 hours.</p>
-                    <a href="index.html" class="btn-apple-return">Return to Home</a>
+                    <h2 class="serif success-title">DISPATCH INITIATED</h2>
+                    <p class="success-text ui">Your request for a high-yield asset dossier is being processed. The SmartPropAI system is selecting a high-alpha opportunity from our nationwide database for your review. Delivery expected shortly. STATUS: SELECTING TARGET ASSET</p>
+                    <a href="index.html" class="btn-apple-return">RETURN TO TERMINAL</a>
                   </div>
                 </div>
               </div>
@@ -1465,7 +1465,7 @@
         if (mode === 'error') statusEl.classList.add('is-error');
       };
 
-      const defaultBtnLabel = 'SEND ME THE REPORT';
+      const defaultBtnLabel = 'GENERATE ALPHA DOSSIER';
       let btnResetTimer = 0;
 
       if (submitBtn) submitBtn.textContent = defaultBtnLabel;
