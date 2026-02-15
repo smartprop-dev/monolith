@@ -478,13 +478,13 @@
         0 0 25px rgba(197, 162, 83, .15);
     }
     .btn-solid:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.03);
+      transform: translateY(-0.5px);
+      filter: brightness(1.02);
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .38),
-        inset 0 -10px 18px rgba(0, 0, 0, .16),
-        0 28px 78px rgba(197, 162, 83, .20),
-        0 0 34px rgba(197, 162, 83, .18);
+        inset 0 1px 0 rgba(255, 255, 255, .36),
+        inset 0 -10px 18px rgba(0, 0, 0, .17),
+        0 14px 36px rgba(197, 162, 83, .12),
+        0 0 14px rgba(197, 162, 83, .08);
     }
     .btn-ghost {
       background: rgba(0, 0, 0, .26);
@@ -1119,6 +1119,23 @@
             padding: clamp(18px, 2.4vw, 28px);
             display: flex;
             flex-direction: column;
+          }
+          .access-card,
+          .access-card:hover,
+          .access-card:focus-within {
+            transform: none !important;
+            border-color: var(--obs-border-static) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .03), 0 12px 30px rgba(0, 0, 0, .44) !important;
+          }
+
+          .access-card::before,
+          .access-card::after,
+          .access-card:hover::before,
+          .access-card:hover::after,
+          .access-card:focus-within::before,
+          .access-card:focus-within::after {
+            opacity: 0 !important;
+            animation: none !important;
           }
           .access-head {
             padding-bottom: 12px;
