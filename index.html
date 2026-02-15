@@ -99,7 +99,15 @@
       --headerH: calc(var(--headerBaseH) + var(--headerSafeTop));
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    *:focus { outline: none !important; }
+    *:focus-visible {
+      outline: 2px solid rgba(197, 162, 83, .66) !important;
+      outline-offset: 2px;
+    }
     html { -webkit-text-size-adjust: 100%; }
 
     a { color: inherit; }
@@ -1266,20 +1274,17 @@
       opacity: 0;
       -webkit-transform: translate3d(0, 10px, 0);
       transform: translate3d(0, 10px, 0);
-      transition: opacity .8s var(--ease), -webkit-transform .8s var(--ease), transform .8s var(--ease);
+      transition: opacity .8s cubic-bezier(0.2, 0, 0.2, 1), transform .8s cubic-bezier(0.2, 0, 0.2, 1);
       will-change: opacity, transform;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
     }
     .reveal.in {
       opacity: 1;
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-    }
-    @supports (-webkit-touch-callout: none) {
-      .reveal {
-        transition: opacity .72s var(--ease), -webkit-transform .72s var(--ease), transform .72s var(--ease);
-      }
     }
 
     .footer.footer-terminal {
@@ -1409,7 +1414,7 @@
         animation: none !important;
       }
       .terminal { opacity: 1; transform: none; animation: none !important; }
-      .reveal { opacity: 1; transform: none; transition: none !important; }
+      .reveal { opacity: 1; -webkit-transform: none; transform: none; transition: none !important; }
       .elite-entrance { animation: none !important; filter: none !important; }
     }
   </style>
@@ -1965,6 +1970,11 @@
       const heroMedia = document.querySelector('.hero-media');
       const monolithEl = document.querySelector('.monolith');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const userAgent = window.navigator.userAgent || '';
+      const isIosDevice = /iP(ad|hone|od)/.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isWebKitEngine = /WebKit/i.test(userAgent);
+      const isOtherIosBrowser = /(CriOS|FxiOS|EdgiOS|OPiOS)/i.test(userAgent);
+      const isIosSafari = isIosDevice && isWebKitEngine && !isOtherIosBrowser;
       const canUseHistory = !isFramerMode;
 
       const hostStyle = hostCandidate ? getComputedStyle(hostCandidate) : null;
@@ -2454,6 +2464,21 @@
       }
 
       const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+      if (isIosSafari && revealEls.length) {
+        revealEls.forEach((el) => {
+          Array.from(el.querySelectorAll('*')).forEach((child) => {
+            if (child.matches('a,button,input,select,textarea,label,[role=\"button\"],[tabindex]')) return;
+            const styles = window.getComputedStyle(child);
+            const transitionProps = styles.transitionProperty.split(',').map(p => p.trim());
+            const transitionsTransform = transitionProps.some(prop => prop === 'all' || prop === 'transform' || prop === '-webkit-transform');
+            const hasTransformAnimation = styles.animationName !== 'none' || styles.transform !== 'none' || transitionsTransform;
+            if (!hasTransformAnimation) {
+              child.style.webkitTransform = 'translateZ(0)';
+              child.style.transform = 'translateZ(0)';
+            }
+          });
+        });
+      }
       if ('IntersectionObserver' in window && revealEls.length) {
         const io = new IntersectionObserver((entries) => {
           for (const ent of entries) {
@@ -2462,7 +2487,7 @@
               io.unobserve(ent.target);
             }
           }
-        }, { root: observerRoot, threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { root: observerRoot, threshold: 0.01, rootMargin: '0px 0px -10px 0px' });
 
         revealEls.forEach(el => {
           el.classList.add('reveal');
