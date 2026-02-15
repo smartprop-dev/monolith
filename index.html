@@ -623,6 +623,23 @@
     }
 
     .levitate { will-change: transform, opacity; }
+    @keyframes eliteMaterialize {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+        filter: blur(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+    .elite-entrance {
+      animation: eliteMaterialize .85s cubic-bezier(0.16, 1, 0.3, 1) both;
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
 
     .btn {
       text-decoration: none;
@@ -1376,6 +1393,7 @@
       }
       .terminal { opacity: 1; transform: none; animation: none !important; }
       .reveal { opacity: 1; transform: none; transition: none !important; }
+      .elite-entrance { animation: none !important; filter: none !important; }
     }
   </style>
 </head>
@@ -2287,6 +2305,7 @@
       if (path === '/portal' || path === '/portal.html') openModal(path);
 
       const ELITE60_KEY = 'elite60_submitted';
+      const ELITE_ENTRANCE_CLASS = 'elite-entrance';
       const elite60Form = document.getElementById('elite60Form');
       const elite60LockedCard = document.getElementById('elite60LockedCard');
       const elite60Status = document.getElementById('elite60FormStatus');
@@ -2321,6 +2340,9 @@
         if (elite60LockedCard) {
           elite60LockedCard.hidden = false;
           elite60LockedCard.setAttribute('aria-hidden', 'false');
+          elite60LockedCard.classList.remove(ELITE_ENTRANCE_CLASS);
+          void elite60LockedCard.offsetWidth;
+          elite60LockedCard.classList.add(ELITE_ENTRANCE_CLASS);
         }
       };
 
@@ -2331,6 +2353,7 @@
           elite60Form.removeAttribute('inert');
         }
         if (elite60LockedCard) {
+          elite60LockedCard.classList.remove(ELITE_ENTRANCE_CLASS);
           elite60LockedCard.hidden = true;
           elite60LockedCard.setAttribute('aria-hidden', 'true');
         }
