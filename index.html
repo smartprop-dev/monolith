@@ -1362,7 +1362,7 @@
 
       .h1 {
         font-size: clamp(34px, 9.2vw, 46px);
-        line-height: 1.06;
+        line-height: 1.2;
         letter-spacing: -0.02em !important;
         word-break: keep-all;
         overflow-wrap: anywhere;
@@ -1416,6 +1416,17 @@
       .terminal { opacity: 1; transform: none; animation: none !important; }
       .reveal { opacity: 1; -webkit-transform: none; transform: none; transition: none !important; }
       .elite-entrance { animation: none !important; filter: none !important; }
+    }
+
+    @media (min-width: 861px) {
+      .hero .hero-left .h1 {
+        line-height: 1.12;
+      }
+
+      .hero .hero-left .h1 > .gold {
+        display: inline-block;
+        margin-top: 0.08em;
+      }
     }
   </style>
 </head>
