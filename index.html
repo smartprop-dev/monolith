@@ -903,14 +903,54 @@
     .small { margin-top: 10px; font-size: 10px; text-transform: uppercase; }
 
     .pipeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
-    .pipe-card { padding: 22px; position: relative; overflow: hidden; }
-    .pipe-num { position: absolute; top: 14px; right: 14px; font-size: 12px; color: rgba(255, 255, 255, .30); }
-    .pipe-card.featured {
-      border-color: rgba(197, 162, 83, .16);
-      background: linear-gradient(180deg, rgba(197, 162, 83, .10), rgba(10, 12, 16, .28));
+    .pipe-card {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(197, 162, 83, .24);
+      background-color: #020203;
+      background-image: var(--obs-bg);
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .09),
-        0 14px 36px rgba(0, 0, 0, .50);
+        inset 0 1px 0 rgba(255, 255, 255, .05),
+        0 14px 34px rgba(0, 0, 0, .50);
+      transition: none;
+    }
+    #mechanism .pipeline .pipe-card::before,
+    #mechanism .pipeline .pipe-card::after {
+      opacity: 0 !important;
+      animation: none !important;
+      background: none !important;
+      display: none !important;
+    }
+    #mechanism .pipeline .pipe-card > * {
+      position: relative;
+      z-index: 1;
+    }
+    #mechanism .pipeline .pipe-card:hover,
+    #mechanism .pipeline .pipe-card:focus-within {
+      border-color: rgba(197, 162, 83, .24);
+      background-color: #020203;
+      background-image: var(--obs-bg);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .05),
+        0 14px 34px rgba(0, 0, 0, .50);
+    }
+    .pipe-card.featured {
+      border-color: rgba(197, 162, 83, .30);
+      background-color: #020203;
+      background-image: var(--obs-bg);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .06),
+        0 14px 34px rgba(0, 0, 0, .50);
+    }
+    #mechanism .pipeline .pipe-card.featured:hover,
+    #mechanism .pipeline .pipe-card.featured:focus-within {
+      border-color: rgba(197, 162, 83, .30);
+      background-color: #020203;
+      background-image: var(--obs-bg);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .06),
+        0 14px 34px rgba(0, 0, 0, .50);
     }
     .pipe-title { font-size: 18px; font-weight: 650; text-transform: none; }
     .pipe-text { margin-top: 10px; color: rgba(247, 248, 251, .62); line-height: 1.7; font-size: 14px; text-transform: none; }
@@ -929,7 +969,18 @@
     .offer-head { display: flex; align-items: center; gap: 10px; font-size: 10px; color: rgba(255, 255, 255, .42); margin-bottom: 12px; }
     .offer-title { font-size: 16px; font-weight: 650; text-transform: none; }
     .offer-text { margin-top: 10px; color: rgba(247, 248, 251, .62); line-height: 1.7; font-size: 14px; text-transform: none; }
-    .offer-cta { margin-top: 14px; font-size: 10px; color: rgba(255, 255, 255, .55); letter-spacing: .14em; }
+    .offer-cta { margin-top: 14px; }
+    #mechanism .offers .offer-cta .offer-cta-button {
+      min-height: 38px;
+      height: auto;
+      width: min(420px, 100%);
+      line-height: 1.25;
+      text-align: center;
+      white-space: normal;
+      letter-spacing: .09em;
+      padding: 8px 13px;
+      margin-inline: auto;
+    }
     .cta-premium.featured {
       border-color: rgba(197, 162, 83, .22);
       background: linear-gradient(180deg, rgba(197, 162, 83, .10), rgba(16, 24, 32, .14));
@@ -1287,6 +1338,64 @@
       transform: translate3d(0, 0, 0);
     }
 
+    .architect-cta-section {
+      padding-top: 28px;
+      padding-bottom: 44px;
+      border-top: 1px solid rgba(255, 255, 255, .045);
+      background:
+        radial-gradient(circle at 68% 12%, rgba(197, 162, 83, .10), transparent 52%),
+        linear-gradient(180deg, rgba(2, 2, 3, .98), rgba(2, 2, 3, 1));
+    }
+    .architect-cta-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .architect-cta-btn {
+      width: min(720px, 100%);
+      min-height: 52px;
+      height: auto;
+      padding: 12px 22px;
+      border: 1px solid rgba(197, 162, 83, .42);
+      border-radius: 999px;
+      color: rgba(247, 248, 251, .96);
+      background:
+        radial-gradient(circle at 18% 6%, rgba(255, 255, 255, .08), transparent 38%),
+        linear-gradient(180deg, rgba(11, 15, 20, .90), rgba(2, 2, 3, .95));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        inset 0 -12px 18px rgba(0, 0, 0, .30),
+        0 10px 28px rgba(0, 0, 0, .52),
+        0 0 0 1px rgba(197, 162, 83, .08),
+        0 0 22px rgba(197, 162, 83, .12);
+      letter-spacing: .18em;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.3;
+      text-decoration: none;
+      transition:
+        transform .26s var(--ease2),
+        box-shadow .26s var(--ease2),
+        border-color .26s var(--ease2),
+        filter .26s var(--ease2);
+    }
+    .architect-cta-btn:hover,
+    .architect-cta-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(197, 162, 83, .62);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .10),
+        inset 0 -12px 18px rgba(0, 0, 0, .24),
+        0 16px 34px rgba(0, 0, 0, .56),
+        0 0 0 1px rgba(197, 162, 83, .16),
+        0 0 32px rgba(197, 162, 83, .20);
+      filter: brightness(1.03);
+    }
+    .architect-cta-btn:focus-visible {
+      outline: 2px solid rgba(197, 162, 83, .42);
+      outline-offset: 3px;
+    }
+
     .footer.footer-terminal {
       background: #020203;
       border-top: 1px solid rgba(197, 162, 83, .15);
@@ -1398,6 +1507,12 @@
       .log-row { grid-template-columns: 1fr; gap: 8px; }
       .log-row .s { justify-self: start; }
       .prov-row { grid-template-columns: 1fr 90px 90px; }
+      .architect-cta-section { padding-top: 22px; padding-bottom: 36px; }
+      .architect-cta-btn {
+        width: 100%;
+        min-height: 48px;
+        letter-spacing: .14em;
+      }
     }
 
     @media (max-width: 390px) {
@@ -1405,6 +1520,17 @@
       .pill { font-size: 9px; }
       .h2 { font-size: 21px; }
       .btn { height: 46px; }
+      #mechanism .offers .offer-cta .offer-cta-button {
+        min-height: 36px;
+        font-size: 9px;
+        letter-spacing: .07em;
+        padding-inline: 10px;
+      }
+      .architect-cta-btn {
+        font-size: 9px;
+        letter-spacing: .11em;
+        padding-inline: 14px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1412,6 +1538,10 @@
       .bio-sweep, .vault-diagram::after, .trust-ring::before,
       .barrier::before, .glass:hover::before, .glass:focus-within::before {
         animation: none !important;
+      }
+      #mechanism .pipeline .pipe-card,
+      #mechanism .pipeline .pipe-card::after {
+        transition: none !important;
       }
       .terminal { opacity: 1; transform: none; animation: none !important; }
       .reveal { opacity: 1; -webkit-transform: none; transform: none; transition: none !important; }
@@ -1574,7 +1704,6 @@
 
           <div class="pipeline">
             <div class="pipe-card glass levitate reveal obsidian-base" data-reveal>
-              <div class="pipe-num mono nums">01</div>
               <div class="pipe-body">
                 <div class="pipe-title">Ingestion</div>
                 <div class="pipe-text">
@@ -1585,7 +1714,6 @@
             </div>
 
             <div class="pipe-card glass levitate reveal obsidian-base" data-reveal>
-              <div class="pipe-num mono nums">02</div>
               <div class="pipe-body">
                 <div class="pipe-title">Neural Core</div>
                 <div class="pipe-text">
@@ -1596,7 +1724,6 @@
             </div>
 
             <div class="pipe-card glass levitate featured reveal obsidian-base" data-reveal>
-              <div class="pipe-num mono nums">03</div>
               <div class="pipe-body">
                 <div class="pipe-title gold">Actionable Alpha</div>
                 <div class="pipe-text">
@@ -1616,7 +1743,9 @@
               </div>
               <div class="offer-title">Review Sample Report</div>
               <div class="offer-text">Investor-grade PDF with ROI projections, downside defenses, and full provenance tracking.</div>
-              <div class="offer-cta mono">OPEN REPORT ></div>
+              <div class="offer-cta">
+                <span class="btn btn-solid btn-block mono offer-cta-button">GET 94.2% PRECISION DOSSIER</span>
+              </div>
             </a>
 
             <a class="offer glass levitate cta-premium featured reveal" data-reveal href="analysis.html">
@@ -1627,7 +1756,9 @@
               </div>
               <div class="offer-title">Run Precision Analysis</div>
               <div class="offer-text">Enter a US address and receive ROI + risk telemetry — sealed to an immutable audit log.</div>
-              <div class="offer-cta mono">RUN ANALYSIS ></div>
+              <div class="offer-cta">
+                <span class="btn btn-solid btn-block mono offer-cta-button">DEPLOY ANALYSIS PROTOCOL</span>
+              </div>
             </a>
           </div>
         </div>
@@ -1910,6 +2041,11 @@
               <div class="form-sub mono muted">STATION: ENCRYPTED / SESSION: ACTIVE</div>
             </div>
           </div>
+        </div>
+      </section>
+      <section class="section architect-cta-section" aria-label="Architect Dossier Access">
+        <div class="wrap architect-cta-inner">
+          <a href="architect.html" class="btn mono architect-cta-btn">IDENTIFY SYSTEM ARCHITECT</a>
         </div>
       </section>
     </main>
