@@ -20,18 +20,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <title>SmartPropAI — Precision Asset Analysis</title>
-  <meta name="description" content="Monolith is a siloed, institutional decision layer for real estate that turns noisy public inputs into provenance-locked signals for disciplined execution." />
-  <link rel="canonical" href="index.html" />
+  <title>SmartPropAI &#8212; Sample Forensic Memo</title>
+  <meta name="description" content="See how SmartPropAI converts documentary inconsistency into price cuts, holdbacks, cure paths, and go/no-go clarity for live real estate deals." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="analysis.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SmartPropAI" />
-  <meta property="og:title" content="SmartPropAI Monolith" />
-  <meta property="og:description" content="Monolith is a siloed, institutional decision layer for real estate that turns noisy public inputs into provenance-locked signals for disciplined execution." />
-  <meta property="og:url" content="index.html" />
+  <meta property="og:title" content="SmartPropAI &#8212; Sample Forensic Memo" />
+  <meta property="og:description" content="See how SmartPropAI converts documentary inconsistency into price cuts, holdbacks, cure paths, and go/no-go clarity for live real estate deals." />
+  <meta property="og:url" content="analysis.html" />
   <meta property="og:image" content="https://i.postimg.cc/KjTrRpGQ/kling-20260206-Text-to-Image-A-minimali-4285-7-2-removebg-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SmartPropAI Monolith" />
-  <meta name="twitter:description" content="Monolith is a siloed, institutional decision layer for real estate that turns noisy public inputs into provenance-locked signals for disciplined execution." />
+  <meta name="twitter:title" content="SmartPropAI &#8212; Sample Forensic Memo" />
+  <meta name="twitter:description" content="See how SmartPropAI converts documentary inconsistency into price cuts, holdbacks, cure paths, and go/no-go clarity for live real estate deals." />
   <meta name="twitter:image" content="https://i.postimg.cc/KjTrRpGQ/kling-20260206-Text-to-Image-A-minimali-4285-7-2-removebg-preview.png" />
 
   <style>
@@ -1091,7 +1092,61 @@
       .terminal { opacity: 1; transform: none; animation: none !important; }
       .reveal { opacity: 1; transform: none; transition: none !important; }
     }
-  </style>
+            .memo-stage {
+            display: grid;
+            gap: 18px;
+          }
+          .memo-intro {
+            color: rgba(247, 248, 251, .72);
+            font-size: 14px;
+            line-height: 1.82;
+          }
+          .memo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+          }
+          .memo-item {
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(0, 0, 0, .24);
+          }
+          .memo-item-title {
+            margin: 0 0 8px;
+            font-size: 11px;
+            color: rgba(197, 162, 83, .92);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+          }
+          .memo-item-text {
+            margin: 0;
+            color: rgba(247, 248, 251, .74);
+            font-size: 14px;
+            line-height: 1.78;
+          }
+          .memo-note {
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(0, 0, 0, .18);
+            color: rgba(247, 248, 251, .64);
+            font-size: 13px;
+            line-height: 1.75;
+          }
+          .memo-actions {
+            display: grid;
+            gap: 12px;
+          }
+          .memo-actions .btn {
+            width: 100%;
+          }
+          @media (max-width: 860px) {
+            .memo-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        </style>
 </head>
 <body>
   <div id="monolithHost" class="monolith-host">
@@ -1408,63 +1463,122 @@
               stroke-dashoffset: 0;
             }
           }
+                  .memo-stage {
+            display: grid;
+            gap: 18px;
+          }
+          .memo-intro {
+            color: rgba(247, 248, 251, .72);
+            font-size: 14px;
+            line-height: 1.82;
+          }
+          .memo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+          }
+          .memo-item {
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(0, 0, 0, .24);
+          }
+          .memo-item-title {
+            margin: 0 0 8px;
+            font-size: 11px;
+            color: rgba(197, 162, 83, .92);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+          }
+          .memo-item-text {
+            margin: 0;
+            color: rgba(247, 248, 251, .74);
+            font-size: 14px;
+            line-height: 1.78;
+          }
+          .memo-note {
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(0, 0, 0, .18);
+            color: rgba(247, 248, 251, .64);
+            font-size: 13px;
+            line-height: 1.75;
+          }
+          .memo-actions {
+            display: grid;
+            gap: 12px;
+          }
+          .memo-actions .btn {
+            width: 100%;
+          }
+          @media (max-width: 860px) {
+            .memo-grid {
+              grid-template-columns: 1fr;
+            }
+          }
         </style>
 
-        <main role="main" class="access-main" aria-label="Property Analysis Request">
+                <main role="main" class="access-main" aria-label="Sample Forensic Memo">
             <div class="panel glass obsidian-base obsidian-interactive access-card" id="accessCard">
               <div class="access-head">
                 <div class="panel-head mono">
                   <a href="index.html" aria-label="Return to Home">
                     <span class="tag">SP</span>
                   </a>
-                  <span class="tag">Precision Asset Analysis</span>
-                  <span class="muted">AI Valuation Protocol</span>
+                  <span class="tag">SAMPLE OUTPUT</span>
+                  <span class="muted">DECISION-GRADE MEMO</span>
                 </div>
-                <h1 class="serif access-title">Precision Asset Analysis</h1>
+                <h1 class="serif access-title">Sample Forensic Memo</h1>
                 <p class="access-sub ui">
-                  Initiate deep neural evaluation. Cross-referencing 141+ origin-tracked sources for predictive alpha and nationwide risk telemetry.
+                  This sample shows how SmartPropAI packages documentary inconsistency into decision-grade output for a live real estate deal. The memo is built to surface hidden liabilities, separate verified issues from unresolved gaps, and show how findings map into economics.
                 </p>
               </div>
 
-              <div class="access-stage">
-                <form class="access-form" id="analysisForm" action="https://formspree.io/f/xjgogkek" method="POST" novalidate>
-                  <input type="hidden" name="subject" value="Property Analysis Request" />
-                  <div class="fields">
-                    <label class="field">
-                      <span class="label mono">Full Name</span>
-                      <input type="text" name="name" placeholder="Enter your name" autocomplete="name" required />
-                    </label>
+              <div class="access-stage memo-stage">
+                <div class="memo-intro ui">
+                  One live asset. One forensic memo. Founder-led review. The work product is designed to support price cuts, holdbacks, cure paths, repricing leverage, and walk-away decisions.
+                </div>
 
-                    <label class="field">
-                      <span class="label mono">Email</span>
-                      <input type="email" name="_replyto" placeholder="Email" autocomplete="email" required />
-                    </label>
+                <div class="memo-grid">
+                  <section class="memo-item">
+                    <h2 class="memo-item-title mono">Hidden Liabilities</h2>
+                    <p class="memo-item-text ui">Flags title, tax, debt, permit, LL97, and documentary conflicts that can move economics even when the operating story still looks clean.</p>
+                  </section>
 
-                    <label class="field field-full">
-                      <span class="label mono">Target Property Address</span>
-                      <input type="text" name="property" placeholder="123 Main St, Miami, FL" autocomplete="street-address" required />
-                    </label>
-                  </div>
+                  <section class="memo-item">
+                    <h2 class="memo-item-title mono">Repricing Leverage</h2>
+                    <p class="memo-item-text ui">Separates hard issues from negotiable gaps so buyers, lenders, and advisors can support price cuts or re-underwrite around specific evidence.</p>
+                  </section>
 
-                  <div class="access-actions">
-                    <button class="btn btn-solid mono" type="submit" id="submitBtn">RUN ANALYSIS PROTOCOL</button>
-                    <div class="access-status mono" id="formStatus" aria-live="polite"></div>
-                  </div>
-                  <div class="access-status mono"><a href="index.html">EXIT TO MAIN DASHBOARD</a></div>
-                </form>
+                  <section class="memo-item">
+                    <h2 class="memo-item-title mono">Holdback Logic</h2>
+                    <p class="memo-item-text ui">Identifies exposures better handled with escrows, reserves, or deferred release conditions instead of headline price alone.</p>
+                  </section>
 
-                <div class="success-content" id="successContent" aria-live="polite" aria-hidden="true">
-                  <div class="success-inner">
-                    <div class="success-icon" aria-hidden="true">
-                      <svg viewBox="0 0 40 40" role="img" aria-hidden="true">
-                        <circle class="ring" cx="20" cy="20" r="12"></circle>
-                        <path class="check" d="M14 20.6 L18 24.8 L26.2 16.4"></path>
-                      </svg>
-                    </div>
-                    <h2 class="serif success-title">TRANSMISSION RECEIVED</h2>
-                    <p class="success-text ui">Asset verification protocol activated. Your data has been transferred to the SmartPropAI priority processing queue. Senior analysts and neural networks have initiated market telemetry cross-referencing. ESTIMATED DELIVERY: 24 HOURS</p>
-                    <a href="index.html" class="btn-apple-return">RETURN TO TERMINAL</a>
-                  </div>
+                  <section class="memo-item">
+                    <h2 class="memo-item-title mono">Cure Checklist</h2>
+                    <p class="memo-item-text ui">Turns missing support into a file-level checklist with the records, consents, and reconciliations needed to clear exposure.</p>
+                  </section>
+
+                  <section class="memo-item">
+                    <h2 class="memo-item-title mono">Walk-Away Triggers</h2>
+                    <p class="memo-item-text ui">Marks the points where documentary conflict, unresolved liability, or unsupported assumptions break the deal case outright.</p>
+                  </section>
+
+                  <section class="memo-item">
+                    <h2 class="memo-item-title mono">Evidence Chain</h2>
+                    <p class="memo-item-text ui">Maps each finding back to source material, transformation logic, and review posture so teams can distinguish verified issues from unresolved gaps and quarantined risk.</p>
+                  </section>
+                </div>
+
+                <div class="memo-note ui">
+                  The memo is not a generic feature sheet. It is a controlled work product for messy live assets where documentary inconsistency can change pricing, holdback structure, cure sequencing, or go / no-go clarity.
+                </div>
+
+                <div class="memo-actions">
+                  <a class="btn btn-solid mono" href="access.html">REQUEST LIVE-ASSET REVIEW</a>
+                  <a href="index.html" class="btn-apple-return">RETURN TO SMARTPROPAI</a>
                 </div>
               </div>
             </div>
@@ -1473,147 +1587,9 @@
     </div>
   </div>
 
-  <script>
+    <script>
     (() => {
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const form = document.getElementById('analysisForm');
-      const submitBtn = document.getElementById('submitBtn');
-      const statusEl = document.getElementById('formStatus');
-      const accessCard = document.getElementById('accessCard');
-      const successContent = document.getElementById('successContent');
-      const returnHomeBtn = document.querySelector('.btn-apple-return');
-
-      const setStatus = (message, mode = '') => {
-        if (!statusEl) return;
-        statusEl.textContent = message;
-        statusEl.classList.remove('is-error');
-        if (mode === 'error') statusEl.classList.add('is-error');
-      };
-
-      const defaultBtnLabel = 'RUN ANALYSIS PROTOCOL';
-      let btnResetTimer = 0;
-
-      if (submitBtn) submitBtn.textContent = defaultBtnLabel;
-
-      const clearButtonValidationState = () => {
-        if (!submitBtn) return;
-        submitBtn.classList.remove('btn-validation-error', 'btn-shake');
-      };
-
-      const clearButtonResetTimer = () => {
-        if (!btnResetTimer) return;
-        window.clearTimeout(btnResetTimer);
-        btnResetTimer = 0;
-      };
-
-      const resetSubmitButton = () => {
-        if (!submitBtn) return;
-        clearButtonValidationState();
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-        submitBtn.textContent = defaultBtnLabel;
-      };
-
-      const queueSubmitButtonReset = (delay = 2000) => {
-        clearButtonResetTimer();
-        btnResetTimer = window.setTimeout(() => {
-          resetSubmitButton();
-          btnResetTimer = 0;
-        }, delay);
-      };
-
-      const showValidationFeedback = (message) => {
-        if (!submitBtn) return;
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-        submitBtn.textContent = message;
-        submitBtn.classList.add('btn-validation-error');
-        submitBtn.classList.remove('btn-shake');
-        if (!prefersReduced) {
-          void submitBtn.offsetWidth;
-          submitBtn.classList.add('btn-shake');
-        }
-        queueSubmitButtonReset(2000);
-      };
-
-      const makeFormInert = () => {
-        if (!form) return;
-        form.setAttribute('aria-hidden', 'true');
-        form.setAttribute('inert', '');
-        const focusables = form.querySelectorAll('a[href], button, input, select, textarea, [tabindex]');
-        focusables.forEach((el) => {
-          el.setAttribute('tabindex', '-1');
-        });
-      };
-
-      const showInlineSuccess = () => {
-        if (!accessCard || !successContent) return;
-        accessCard.classList.add('is-success');
-        makeFormInert();
-        successContent.setAttribute('aria-hidden', 'false');
-
-        const focusDelay = prefersReduced ? 0 : 430;
-        window.setTimeout(() => {
-          if (returnHomeBtn && typeof returnHomeBtn.focus === 'function') {
-            returnHomeBtn.focus({ preventScroll: true });
-          }
-        }, focusDelay);
-      };
-
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          if (!submitBtn) return;
-
-          clearButtonResetTimer();
-          clearButtonValidationState();
-          setStatus('');
-
-          if (!form.checkValidity()) {
-            showValidationFeedback('PLEASE FILL ALL FIELDS');
-            const firstInvalid = form.querySelector(':invalid');
-
-            if (firstInvalid && typeof firstInvalid.focus === 'function') {
-              firstInvalid.focus({ preventScroll: true });
-            }
-            return;
-          }
-
-          submitBtn.disabled = true;
-          submitBtn.style.opacity = '.72';
-          submitBtn.textContent = 'TRANSMITTING...';
-
-          const formData = new FormData(form);
-
-          try {
-            const response = await fetch('https://formspree.io/f/xjgogkek', {
-              method: 'POST',
-              body: formData,
-              headers: { Accept: 'application/json' }
-            });
-
-            if (response.ok) {
-              form.reset();
-              resetSubmitButton();
-              showInlineSuccess();
-              return;
-            }
-
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = '1';
-            submitBtn.textContent = 'ERROR. TRY AGAIN.';
-            setStatus('CONNECTION INTERRUPTED. TRY AGAIN.', 'error');
-            queueSubmitButtonReset(1800);
-          } catch (_) {
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = '1';
-            submitBtn.textContent = 'ERROR. TRY AGAIN.';
-            setStatus('NETWORK ERROR. CHECK CONNECTION.', 'error');
-            queueSubmitButtonReset(1800);
-          }
-        });
-      }
-
       const obsidianInteractiveCards = Array.from(document.querySelectorAll('.obsidian-interactive'));
       if (!prefersReduced && obsidianInteractiveCards.length) {
         obsidianInteractiveCards.forEach((card) => {
@@ -1645,3 +1621,4 @@
   </script>
 </body>
 </html>
+
